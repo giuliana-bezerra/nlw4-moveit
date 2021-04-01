@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  background: #5965e0;
+  height: 100vh;
+}
+
+.watermark {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+
+.watermarkImg {
+  width: 48rem;
+  height: 41.25rem;
+  object-fit: cover;
+}
+
+.signForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 3rem;
+}
+
+.logoWhite {
+  width: 22.5rem;
+  height: 4.75rem;
+}
+
+.titleForm {
+  margin-top: 5rem;
+  color: #ffffff;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 2.25rem;
+  margin-bottom: 2rem;
+}
+
+.githubIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.githubContainer {
+  display: flex;
+}
+
+.githubText {
+  color: #b3b9ff;
+  font-family: 'Inter';
+  font-weight: 500;
+  width: 15rem;
+  line-height: 1.875rem;
+  margin-left: 1.25rem;
+}
+
+.githubForm {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+.githubInputText {
+  width: 21.25rem;
+  height: 5rem;
+  background: linear-gradient(90deg, #4953b8 0%, rgba(73, 83, 184, 0.2) 100%);
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 2.125rem;
+  color: var(--white);
+  padding: 1rem;
+}
+
+.githubInputText::placeholder {
+  color: #b2b9ff;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2.125rem;
+}
+
+.githubButton {
+  width: 5rem;
+  height: 5rem;
+  background: #4953b8;
+  border: none;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.githubButton:focus {
+  background: var(--green);
+}

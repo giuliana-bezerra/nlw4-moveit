@@ -1,58 +1,60 @@
-import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useSession, getCsrfToken, signIn } from 'next-auth/client';
+import styles from '../styles/pages/Landing.module.css';
 
-import ChallengeBox from '../components/ChallengeBox';
-import CompletedChallenges from '../components/CompletedChallenges';
-import Countdown from '../components/Countdown';
-import ExperienceBar from '../components/ExperienceBar';
-import Profile from '../components/Profile';
-import { CountdownProvider } from '../contexts/CountdownContext';
+export default function Landing({ csrfToken }) {
+  const [session, loading] = useSession();
+  const router = useRouter();
 
-import styles from '../styles/pages/Home.module.css';
-import { ChallengeProvider } from '../contexts/ChallengeContext';
+  function handleSignIn(e) {
+    e.preventDefault();
+    signIn('github');
+  }
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+  if (loading) return null;
 
-export default function Home(props: HomeProps) {
+  if (session) {
+    router.replace('/home');
+  }
   return (
-    <ChallengeProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-        <ExperienceBar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
+    <div className={styles.container}>
+      <div className={styles.watermark}>
+        <img className={styles.watermarkImg} src="watermark.svg" />
       </div>
-    </ChallengeProvider>
+      <div className={styles.signForm}>
+        <img className={styles.logoWhite} src="logo-white.svg" />
+        <p className={styles.titleForm}>Bem-vindo</p>
+        <div className={styles.githubContainer}>
+          <img className={styles.githubIcon} src="icons/github.svg" />
+          <p className={styles.githubText}>
+            Faça login com seu Github para começar
+          </p>
+        </div>
+        <div className={styles.githubForm}>
+          <input
+            className={styles.githubInputText}
+            type="text"
+            placeholder="Digite seu username"
+          />
+          <button
+            className={styles.githubButton}
+            type="button"
+            onClick={handleSignIn}
+          >
+            <img src="icons/arrow-right.svg" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+// This is the recommended way for Next.js 9.3 or newer
+export async function getServerSideProps(context) {
   return {
     props: {
-      level: Number(level ?? 1),
-      currentExperience: Number(currentExperience ?? 0),
-      challengesCompleted: Number(challengesCompleted ?? 0),
+      csrfToken: await getCsrfToken(context),
     },
   };
-};
+}
