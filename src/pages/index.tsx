@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useSession, getCsrfToken, signIn } from 'next-auth/client';
 import styles from '../styles/pages/Landing.module.css';

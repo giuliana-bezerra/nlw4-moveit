@@ -1,0 +1,136 @@
+.headerTitle {
+  width: 100%;
+}
+
+.leaderBoardTable {
+  margin-top: 2.5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.headerTable {
+  text-align: left;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 1.063rem;
+  text-transform: uppercase;
+  color: var(--text);
+  opacity: 0.5;
+}
+
+.positionHeader {
+  padding-bottom: 1.5rem;
+}
+
+.tableHeader {
+  padding-bottom: 1.5rem;
+  padding-left: 1.875rem;
+}
+
+.positionColumn {
+  background: #ffffff;
+  border-radius: 5px 0px 0px 5px;
+  width: 3.75rem;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-top: 2.125rem;
+  padding-bottom: 2.125rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.userColumn {
+  background: #ffffff;
+  border-radius: 0px 5px 5px 0px;
+  width: 34.75rem;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-top: 2.125rem;
+  padding-bottom: 2.125rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.challengesColumn {
+  background: #ffffff;
+  width: 15rem;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-top: 2.125rem;
+  padding-bottom: 2.125rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: left;
+}
+
+.xpColumn {
+  background: #ffffff;
+  border-radius: 0px 5px 5px 0px;
+  width: 15rem;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-top: 2.125rem;
+  padding-bottom: 2.125rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: left;
+}
+
+.blueText {
+  color: var(--blue);
+}
+
+.avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 3.125rem;
+  margin-right: 1.063rem;
+}
+
+.userNameText {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--title);
+  margin-bottom: 0.438rem;
+}
+
+.userLevelText {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  margin-left: 0.563rem;
+}
+
+.rowBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.columBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowSeparator {
+  padding-bottom: 0.5rem;
+}

@@ -1,0 +1,48 @@
+.container {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  filter: drop-shadow(0px 0px 60px rgba(0, 0, 0, 0.05));
+  height: 100vh;
+  width: 7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.smallLogo {
+  width: 3rem;
+  height: 2.625rem;
+  margin: 2rem;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.menuIcon {
+  margin: 1rem;
+}
+
+.menuIconBlue {
+  color: #5965e0;
+  margin: 1rem;
+}
+
+.buttonIcon {
+  border: none;
+  background: none;
+  width: 100%;
+}
+
+.buttonIconFocused {
+  border: none;
+  background: none;
+  width: 100%;
+  border-left-style: solid;
+  border-left-width: 0.5rem;
+  border-left-color: #5965e0;
+  color: #5965e0;
+  border-radius: 0px 5px 5px 0px;
+}

@@ -1,11 +1,12 @@
 import { createContext, useState, ReactNode, useEffect } from 'react';
-import Cookies from 'js-cookie';
-
+import { Session } from 'next-auth';
 import challenges from '../../challenges.json';
 import LevelUpModel from '../components/LevelUpModel';
+import { useSession } from 'next-auth/client';
+import { api } from '../services/api';
 
 interface Challenge {
-  type: 'bidy' | 'eye';
+  type: 'body' | 'eye';
   description: string;
   amount: number;
 }
@@ -23,29 +24,33 @@ interface ChallengeContextData {
   closeLevelUpModal: () => void;
 }
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  level: number;
+  challengesCompleted: number;
+  currentExperience: number;
+}
+
 interface ChallengeProviderProps {
   children: ReactNode;
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
+  session: Session;
 }
 
 export const ChallengeContext = createContext({} as ChallengeContextData);
 
 export function ChallengeProvider({
+  session,
   children,
-  ...rest
 }: ChallengeProviderProps) {
-  const [level, setLevel] = useState(rest.level);
-  const [currentExperience, setCurrentExperience] = useState(
-    rest.currentExperience,
-  );
-  const [challengesCompleted, setChallengesCompleted] = useState(
-    rest.challengesCompleted,
-  );
+  const [user, setUser] = useState(session.user);
+  const [level, setLevel] = useState(1);
+  const [currentExperience, setCurrentExperience] = useState(0);
+  const [challengesCompleted, setChallengesCompleted] = useState(0);
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
-
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   useEffect(() => {
@@ -53,14 +58,29 @@ export function ChallengeProvider({
   }, []);
 
   useEffect(() => {
-    Cookies.set('level', String(level));
-    Cookies.set('currentExperience', String(currentExperience));
-    Cookies.set('challengesCompleted', String(challengesCompleted));
-  }, [level, currentExperience, challengesCompleted]);
+    api.get(`/users/${session.user.id}`).then((res) => {
+      if (res.data.user === null) {
+        const userPayload = {
+          ...user,
+          level,
+          challengesCompleted,
+          currentExperience,
+        };
+        api.post('/users', userPayload).then((_) => setUser(userPayload));
+      } else {
+        setUser(res.data.user);
+        setLevel(res.data.user.level);
+        setCurrentExperience(res.data.user.currentExperience);
+        setChallengesCompleted(res.data.user.challengesCompleted);
+      }
+    });
+  }, []);
 
   function levelUp() {
-    setLevel(level + 1);
+    const newLevel = level + 1;
+    setLevel(newLevel);
     setIsLevelUpModalOpen(true);
+    return newLevel;
   }
 
   function closeLevelUpModal() {
@@ -88,14 +108,25 @@ export function ChallengeProvider({
   function completeChallenge() {
     if (!activeChallenge) return;
     const { amount } = activeChallenge;
+    let newLevel = level;
     let finalExperience = currentExperience + amount;
     if (finalExperience >= experienceToNextLevel) {
       finalExperience = finalExperience - experienceToNextLevel;
-      levelUp();
+      newLevel = levelUp();
     }
-    setCurrentExperience(finalExperience);
+
+    // FIXME: Salvar atualização do user
+    const userPayload = {
+      ...user,
+      level: newLevel,
+      challengesCompleted: challengesCompleted + 1,
+      currentExperience: finalExperience,
+    };
+    api.post('/users', userPayload).then((_) => setUser(userPayload));
+
+    setCurrentExperience(userPayload.currentExperience);
     setActiveChallenge(null);
-    setChallengesCompleted(challengesCompleted + 1);
+    setChallengesCompleted(userPayload.challengesCompleted);
   }
 
   return (
