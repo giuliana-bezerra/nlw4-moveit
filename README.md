@@ -18,9 +18,9 @@
 
 <br>
 
-<p align="center">
+<a align="center" href="https://nlw4-moveit-five.vercel.app">
   <img alt="MoveIt" src="https://raw.githubusercontent.com/rocketseat-education/nlw-04-reactjs/main/.github/moveit.png" width="100%">
-</p>
+</a>
 
 ## ✨ Tecnologias
 
@@ -32,11 +32,11 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O move.it é um app que une a técnica de Pomodoro com a realização de exercícios físicos para quem passa muito tempo na frente do computador.
+O [move.it](https://nlw4-moveit-five.vercel.app) é um app que une a técnica de Pomodoro com a realização de exercícios físicos para quem passa muito tempo na frente do computador.
 
 ## 🔖 Layout
 
-Você pode visualizar o layout do projeto através [desse link](https://www.figma.com/file/ge20pu3ofMOKoliUyKx1Nl/Move.it-1.0). É necessário ter conta no [Figma](http://figma.com/) para acessá-lo.
+Você pode visualizar o layout do projeto através [desse link](<https://www.figma.com/file/ybNeAvS93o10fpUiLBdH5z/Move.it-2.0-(Copy)?node-id=160%3A2761>). É necessário ter conta no [Figma](http://figma.com/) para acessá-lo.
 
 ## 🚀 Como executar
 
